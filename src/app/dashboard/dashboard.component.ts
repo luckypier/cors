@@ -10,6 +10,7 @@ import { OauthService } from '../services/oauth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  oauthCode: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,10 +20,10 @@ export class DashboardComponent implements OnInit {
     console.log('DashboardComponent..');
 
     this.activatedRoute.queryParams.subscribe(params => {
-      const oauthCode = params['code'];
+      this.oauthCode = params['code'];
 
-      if (oauthCode) {
-        this.testingOauth(oauthCode);
+      if (this.oauthCode) {
+        this.testingOauth(this.oauthCode);
       }
     });
 

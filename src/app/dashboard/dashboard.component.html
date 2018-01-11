@@ -2,4 +2,5 @@
   dashboard works!
 </h1>
 
-<button (click)="testingOauth()">change code for token</button>
+<button [disabled]="!oauthCode" (click)="testingOauth(oauthCode)">change code for token</button>
+<span *ngIf="!oauthCode">there is not oauth code</span>
