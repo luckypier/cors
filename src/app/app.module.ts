@@ -7,6 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { OauthService } from './services/oauth.service';
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,8 +19,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    OauthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
