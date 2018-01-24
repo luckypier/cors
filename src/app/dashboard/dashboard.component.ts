@@ -13,26 +13,30 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
   oauthCode: any;
+  oauthData: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private oauthService: OauthService) { }
+    private oauthService: OauthService) {
+      this.oauthData = oauthService.getData();
+    }
 
   ngOnInit() {
     console.log('DashboardComponent..');
 
     this.activatedRoute.queryParams.subscribe(params => {
-      this.oauthCode = params['code'];
+      this.oauthData.code = params['code'];
 
-      if (this.oauthCode) {
-        this.testingOauth(this.oauthCode);
+      if (this.oauthData.code) {
+        this.testingOauth();
       }
     });
-
   }
 
-  testingOauth(code) {
-    this.oauthService.changeCodeForToken(code)
+  testingOauth() {
+    this.oauthService.setData(this.oauthData);
+
+    this.oauthService.changeCodeForToken()
     .subscribe(
       data => {
         console.log('changeCodeForToken response from DashboardComponent', data);
@@ -44,6 +48,8 @@ export class DashboardComponent implements OnInit {
   }
 
   testingOauthJq(code) {
+    this.oauthService.changeCodeForTokenJq();
+
     const d = {
       'oauth_url': '10.36.70.64:8087',
       'grant_type': 'authorization_code',
@@ -72,17 +78,17 @@ export class DashboardComponent implements OnInit {
     //     console.log(data);
     // });
 
-    $.post(`http://10.36.70.64:8087/oauth/token`,
-    {
-      'grant_type': 'authorization_code',
-      'client_id': 'prime-front-end-key',
-      'client_secret': '49b67f2c-c662-11e7-a3b6-0242ac120003',
-      'redirect_uri': 'http://10.36.71.183:4200/dashboard',
-      'code': code,
-    },
-    function(data, status){
-        console.log(data);
-    });
+    // $.post(`http://10.36.70.64:8087/oauth/token`,
+    // {
+    //   'grant_type': 'authorization_code',
+    //   'client_id': 'prime-front-end-key',
+    //   'client_secret': '49b67f2c-c662-11e7-a3b6-0242ac120003',
+    //   'redirect_uri': 'http://10.36.71.183:4200/dashboard',
+    //   'code': code,
+    // },
+    // function(data, status){
+    //     console.log(data);
+    // });
 
     // const settings = {
     //   'async': true,

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { OauthService } from '../services/oauth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,16 +13,8 @@ export class LoginComponent implements OnInit {
   curlRequest: string;
   userAccount: Number;
 
-  constructor() {
-    this.oauthData = {
-      'oauth_url': '10.36.70.64:8087',
-      'client_id': 'prime-front-end-key',
-      'scope': null,
-      'redirect_uri': 'http://127.0.0.1:4200/dashboard',
-      'response_type': 'code'
-    };
-
-    this.curlRequest = `curl prime-front-end-key:49b67f2c-c662-11e7-a3b6-0242ac120003@${this.oauthData.oauth_url}/oauth/token -d grant_type=authorization_code -d client_id=prime-front-end-key -d redirect_uri=${this.oauthData.redirect_uri} -d code=`;
+  constructor(private oauthService: OauthService) {
+    this.oauthData = oauthService.getData();
     this.userAccount = 4557886000000018;
   }
 
@@ -32,6 +26,8 @@ export class LoginComponent implements OnInit {
 
     const url = prompt('Going to OauthLogin:', `${this.oauthUrlLogin}`);
     if (url != null) {
+        this.oauthData.url = url;
+        this.oauthService.setData(this.oauthData);
         window.location.href = url;
     }
   }

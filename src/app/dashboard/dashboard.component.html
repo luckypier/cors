@@ -2,11 +2,41 @@
   dashboard works!
 </h1>
 
-<button [disabled]="!oauthCode" (click)="testingOauth(oauthCode)">change code for token</button>
-<span *ngIf="!oauthCode">there is not oauth code</span>
+<div>
+  <div class="col-md-6">
+    <span>N° de cuenta: </span> <strong>{{userAccount}}</strong>
+    <br>
+    <br>
 
-<br>
-<br>
-<br>
+    <div class="form-group">
+      <label for="oauth_url">oauth_url:</label>
+      <input class="form-control" id="oauth_url" [(ngModel)]="oauthData.oauth_url">
+    </div>
+    <div class="form-group">
+      <label for="grant_type">grant_type:</label>
+      <input class="form-control" id="grant_type" [(ngModel)]="oauthData.grant_type">
+    </div>
+    <div class="form-group">
+      <label for="client_id">client_id:</label>
+      <input disabled class="form-control" id="client_id" [(ngModel)]="oauthData.client_id">
+    </div>
+    <div class="form-group">
+        <label for="client_secret">client_secret:</label>
+        <input disabled class="form-control" id="client_secret" [(ngModel)]="oauthData.client_secret">
+      </div>
+    <div class="form-group">
+      <label for="redirect_uri">redirect_uri:</label>
+      <input class="form-control" id="redirect_uri" [(ngModel)]="oauthData.redirect_uri">
+    </div>
+    <div class="form-group">
+      <label for="code">code:</label>
+      <input disabled class="form-control" id="code" [(ngModel)]="oauthData.code">
+    </div>
+  </div>
 
-<button (click)="testingOauthJq(oauthCode)">change code for token (Jquery)</button>
+  <div class="col-md-12" style="margin-top: 16px;">
+    <button class="btn btn-primary" [disabled]="!oauthData.code" (click)="testingOauth()">change code for token (Angular)</button>
+    <button class="btn btn-primary" [disabled]="!oauthData.code" (click)="testingOauthJq(oauthData.code)">change code for token (Jquery)</button>
+    <span *ngIf="!oauthCode">there is not oauth code</span>
+  </div>
+</div>
