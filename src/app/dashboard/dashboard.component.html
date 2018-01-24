@@ -34,9 +34,14 @@
     </div>
   </div>
 
+  <div class="col-md-12" style="margin-top: 8px;">
+    <span>Curl exchange token request: </span><br>
+    <strong>curl prime-front-end-key:49b67f2c-c662-11e7-a3b6-0242ac120003@{{oauthData.oauth_url}}/oauth/token -d grant_type=authorization_code -d client_id=prime-front-end-key -d redirect_uri={{oauthData.redirect_uri}} -d code={{oauthData.code}}</strong>
+  </div>
+
   <div class="col-md-12" style="margin-top: 16px;">
     <button class="btn btn-primary" [disabled]="!oauthData.code" (click)="testingOauth()">change code for token (Angular)</button>
     <button class="btn btn-primary" [disabled]="!oauthData.code" (click)="testingOauthJq(oauthData.code)">change code for token (Jquery)</button>
-    <span *ngIf="!oauthCode">there is not oauth code</span>
+    <span *ngIf="!oauthData.code">there is not oauth code</span>
   </div>
 </div>
