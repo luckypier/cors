@@ -16,7 +16,7 @@ export class OauthService {
       'grant_type': 'authorization_code',
       'client_id': 'prime-front-end-key',
       'client_secret': '49b67f2c-c662-11e7-a3b6-0242ac120003',
-      'redirect_uri': 'http://10.36.71.183:4200/dashboard',
+      'redirect_uri': 'http://127.0.0.1:4200/dashboard',
       'response_type': 'code',
       'code': code
     };

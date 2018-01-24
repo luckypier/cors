@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
       'oauth_url': '10.36.70.64:8087',
       'client_id': 'prime-front-end-key',
       'scope': null,
-      'redirect_uri': 'http://10.36.71.183:4200/dashboard',
+      'redirect_uri': 'http://127.0.0.1:4200/dashboard',
       'response_type': 'code'
     };
 
