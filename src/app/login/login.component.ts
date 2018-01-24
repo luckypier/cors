@@ -6,33 +6,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  oauthData: any;
+  oauthUrlLogin: string;
+  curlRequest: string;
+  userAccount: Number;
 
-  constructor() { }
+  constructor() {
+    this.oauthData = {
+      'oauth_url': '10.36.70.64:8087',
+      'client_id': 'prime-front-end-key',
+      'scope': null,
+      'redirect_uri': 'http://10.36.71.183:4200/dashboard',
+      'response_type': 'code'
+    };
+
+    this.curlRequest = `curl prime-front-end-key:49b67f2c-c662-11e7-a3b6-0242ac120003@${this.oauthData.oauth_url}/oauth/token -d grant_type=authorization_code -d client_id=prime-front-end-key -d redirect_uri=${this.oauthData.redirect_uri} -d code=`;
+    this.userAccount = 4557886000000018;
+  }
 
   ngOnInit() {
   }
 
   oauth() {
-    const d = {
-      'oauth_url': '10.36.70.64:8087',
-      'client_id': 'prime-front-end-key',
-      'scope': null,
-      // 'redirect_uri': 'http://anistep.edu.pe',
-      'redirect_uri': 'http://10.36.71.183:4200/dashboard',
-      'response_type': 'code'
-    };
+    this.oauthUrlLogin = `http://${this.oauthData.oauth_url}/oauth/authorize?client_id=${this.oauthData.client_id}&scope=&redirect_uri=${this.oauthData.redirect_uri}&response_type=${this.oauthData.response_type}`;
 
-    const url = `http://${d.oauth_url}/oauth/authorize?client_id=${d.client_id}&scope=&redirect_uri=${d.redirect_uri}&response_type=${d.response_type}`;
-    console.log('Going to Oauth server...', url);
-
-    const curl = `curl prime-front-end-key:49b67f2c-c662-11e7-a3b6-0242ac120003@${d.oauth_url}/oauth/token -d grant_type=authorization_code -d client_id=prime-front-end-key -d redirect_uri=${d.redirect_uri} -d code=`;
-    console.log('curl: ', curl);
-
-    console.log('cc', 4557886000000018);
-
-    debugger;
-
-    window.location.href = url;
+    const url = prompt('Going to OauthLogin:', `${this.oauthUrlLogin}`);
+    if (url != null) {
+        window.location.href = url;
+    }
   }
 
 }
