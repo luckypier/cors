@@ -11,13 +11,16 @@ export class OauthService {
   });
 
   data: any;
+  windowLocation: any;
 
   constructor(private http: Http) {
+    this.windowLocation = window.location;
+
     this.data = {
       'oauth_url': '10.36.70.64:8087',
       'client_id': 'prime-front-end-key',
       'scope': null,
-      'redirect_uri': 'http://127.0.0.1:4200/dashboard',
+      'redirect_uri': `${this.windowLocation.origin}/dashboard`,
       'response_type': 'code',
       'grant_type': 'authorization_code',
       'client_secret': '49b67f2c-c662-11e7-a3b6-0242ac120003',
